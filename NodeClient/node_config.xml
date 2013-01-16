@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <comment>Node Configuration</comment>
+    <comment>
+        DESCRIPTOR:
+        
+        type = The type of node: "primary" or "secondary"
+        node_id = Primary key number of node in server database (number)
+        node_name = Textual identifier of the node (string)
+        username = HTTP authorization username for node (string)
+        password = HTTP authorization password for node (string)
+        base_uri = Base address for REST web resources (URI)
+        
+    </comment>
     <entry key="type">primary</entry>
     <entry key="node_id">1</entry>
     <entry key="node_name">N1</entry>
     <entry key="username">node1</entry>
     <entry key="password">node1</entry>
+    <entry key="base_uri">http://localhost:8080/SpectrumAnalyzer/webresources</entry>
 </properties>

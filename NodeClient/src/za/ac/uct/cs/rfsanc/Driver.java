@@ -1,12 +1,14 @@
-package nodeclient;
+package za.ac.uct.cs.rfsanc;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import nodeclient.primary.PrimaryNode;
-import nodeclient.secondary.SecondaryNode;
+import za.ac.uct.cs.rfsanc.primary.PrimaryNode;
+import za.ac.uct.cs.rfsanc.secondary.SecondaryNode;
 
 /**
+ * Main class of Node-Client application.
+ *
  *
  * @author James
  */
@@ -16,15 +18,16 @@ public class Driver {
 
         PRIMARY, SECONDARY
     }
-    private WebService nodeResource;
-    private WebService primaryNodeResource;
-    private WebService secondaryNodeResource;
     private Properties properties;
     private NodeType nodeType;
     private String nodeName;
     private String nodeID;
     private String username;
     private String password;
+    private PrimaryNode primaryNode;
+    private SecondaryNode secondaryNode;
+    private String baseURI;
+    private static final String NODE_CONFIG_FILENAME = "node_config.xml";
 
     /**
      * Initialize the node
@@ -32,7 +35,7 @@ public class Driver {
     public Driver() {
         properties = new Properties();
         try {
-            properties.loadFromXML(new FileInputStream("node_config.xml"));
+            properties.loadFromXML(new FileInputStream(NODE_CONFIG_FILENAME));
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
@@ -41,13 +44,7 @@ public class Driver {
         this.username = properties.getProperty("username");
         this.password = properties.getProperty("password");
         this.nodeType = properties.getProperty("type").equals("primary") ? NodeType.PRIMARY : NodeType.SECONDARY;
-
-        nodeResource = new WebService("node");
-        nodeResource.setUsernamePassword(username, password);
-        primaryNodeResource = new WebService("node/primary");
-        primaryNodeResource.setUsernamePassword(username, password);
-        secondaryNodeResource = new WebService("node/secondary");
-        secondaryNodeResource.setUsernamePassword(username, password);
+        this.baseURI = properties.getProperty("base_uri");
     }
 
     /**
@@ -63,11 +60,15 @@ public class Driver {
      * depending on whether this is a primary or secondary user node.
      */
     private void runDaemon() {
-        if(nodeType == NodeType.PRIMARY){
-            PrimaryNode primaryNode = new PrimaryNode();
+        System.out.printf("===[ Node %1$s is now starting execution ]===%n", nodeName);
+
+        if (nodeType == NodeType.PRIMARY) {
+            System.out.println("===[ Node is a PRIMARY user ]===");
+            primaryNode = new PrimaryNode(username, password, nodeID);
             primaryNode.runDaemon();
-        } else{
-            SecondaryNode secondaryNode = new SecondaryNode();
+        } else {
+            System.out.println("===[ Node is a SECONDARY user ]===");
+            secondaryNode = new SecondaryNode(username, password, nodeID);
             secondaryNode.runDaemon();
         }
     }

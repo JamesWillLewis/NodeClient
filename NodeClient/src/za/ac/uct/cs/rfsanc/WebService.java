@@ -1,5 +1,5 @@
 
-package nodeclient;
+package za.ac.uct.cs.rfsanc;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
