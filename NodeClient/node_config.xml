@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Node Configuration</comment>
+    <entry key="type">primary</entry>
+    <entry key="node_id">1</entry>
+    <entry key="node_name">N1</entry>
+    <entry key="username">node1</entry>
+    <entry key="password">node1</entry>
+</properties>
