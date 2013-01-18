@@ -11,14 +11,17 @@ public class SecondaryNode extends Node {
 
     private WebService secondaryNodeService;
 
-    public SecondaryNode(String username, String password, String nodeID) {
-        super(username, password, nodeID);
-        secondaryNodeService = new WebService("node/secondary");
+    public SecondaryNode(String username, String password, String nodeID, String baseURI) {
+        super(username, password, nodeID, baseURI);
+        secondaryNodeService = new WebService(baseURI, "node/secondary");
         secondaryNodeService.setUsernamePassword(username, password);
+    }
+    
+    public void submitBid(){
+        
     }
 
     @Override
     public void runDaemon() {
-       
     }
 }

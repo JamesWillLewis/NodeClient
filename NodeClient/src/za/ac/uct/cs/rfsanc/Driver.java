@@ -64,11 +64,11 @@ public class Driver {
 
         if (nodeType == NodeType.PRIMARY) {
             System.out.println("===[ Node is a PRIMARY user ]===");
-            primaryNode = new PrimaryNode(username, password, nodeID);
+            primaryNode = new PrimaryNode(username, password, nodeID, baseURI);
             primaryNode.runDaemon();
         } else {
             System.out.println("===[ Node is a SECONDARY user ]===");
-            secondaryNode = new SecondaryNode(username, password, nodeID);
+            secondaryNode = new SecondaryNode(username, password, nodeID, baseURI);
             secondaryNode.runDaemon();
         }
     }
