@@ -50,28 +50,56 @@ public class WebService {
 
     /**
      * Perform HTTP GET method.
-     * 
+     *
      * @param <T> Type of the response entity.
      * @param responseType Class type of response entity.
-     * @param path Relative URI 
-     * @return 
+     * @param path Relative URI of method.
+     * @return Response entity.
      */
     public <T> T doGet(Class<T> responseType, String path) {
         return webResource.path(path).type(MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    /**
+     * Perform HTTP PUT method.
+     *
+     * @param <T> Type of the response entity.
+     * @param responseType Class type of response entity.
+     * @param path Relative URI of method.
+     * @param requestEntity Request entity to include in request body.
+     * @return Response entity.
+     */
     public <T> T doPut(Class<T> responseType, String path, Object requestEntity) {
         return webResource.path(path).type(MediaType.APPLICATION_JSON).put(responseType, requestEntity);
     }
 
+    /**
+     * Perform HTTP POST method.
+     *
+     * @param <T> Type of the response entity.
+     * @param responseType Class type of response entity.
+     * @param path Relative URI of method.
+     * @param requestEntity Request entity to include in request body.
+     * @return Response entity.
+     */
     public <T> T doPost(Class<T> responseType, String path, Object requestEntity) {
         return webResource.path(path).type(MediaType.APPLICATION_JSON).post(responseType, requestEntity);
     }
 
+    /**
+     * Close this web service.
+     */
     public void close() {
         client.destroy();
     }
 
+    /**
+     * Set username and password for secure authorization on server. Adds a
+     * basic HTTP authorization header to each HTTP request.
+     *
+     * @param username Node username
+     * @param password Node password
+     */
     public void setUsernamePassword(String username, String password) {
         client.addFilter(new HTTPBasicAuthFilter(username, password));
     }

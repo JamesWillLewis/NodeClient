@@ -5,7 +5,7 @@ import za.ac.uct.cs.rfsanc.WebService;
 
 /**
  *
- * @author James
+ * @author James William Lewis (james.will.lewis@gmail.com)
  */
 public class SecondaryNode extends Node {
 
@@ -16,9 +16,8 @@ public class SecondaryNode extends Node {
         secondaryNodeService = new WebService(baseURI, "node/secondary");
         secondaryNodeService.setUsernamePassword(username, password);
     }
-    
-    public void submitBid(){
-        
+
+    public void submitBid() {
     }
 
     @Override

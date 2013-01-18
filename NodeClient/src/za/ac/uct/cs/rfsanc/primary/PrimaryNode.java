@@ -5,7 +5,7 @@ import za.ac.uct.cs.rfsanc.WebService;
 
 /**
  *
- * @author James
+ * @author James William Lewis (james.will.lewis@gmail.com)
  */
 public class PrimaryNode extends Node {
 
@@ -16,21 +16,17 @@ public class PrimaryNode extends Node {
         primaryNodeService = new WebService(baseURI, "node/primary");
         primaryNodeService.setUsernamePassword(username, password);
     }
-    
-    public void queryNode(){
-        
+
+    public void queryNode() {
     }
-    
-    public void submitAllocation(){
-        
+
+    public void submitAllocation() {
     }
-    
-    public void submitAuction(){
-        
+
+    public void submitAuction() {
     }
-    
-    public void reclaimAllocation(){
-        
+
+    public void reclaimAllocation() {
     }
 
     @Override

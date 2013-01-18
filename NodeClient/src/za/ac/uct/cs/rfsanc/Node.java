@@ -2,7 +2,7 @@ package za.ac.uct.cs.rfsanc;
 
 /**
  *
- * @author James
+ * @author James William Lewis (james.will.lewis@gmail.com)
  */
 public abstract class Node {
 

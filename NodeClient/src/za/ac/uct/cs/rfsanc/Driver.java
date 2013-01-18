@@ -9,8 +9,7 @@ import za.ac.uct.cs.rfsanc.secondary.SecondaryNode;
 /**
  * Main class of Node-Client application.
  *
- *
- * @author James
+ * @author James William Lewis (james.will.lewis@gmail.com)
  */
 public class Driver {
 
