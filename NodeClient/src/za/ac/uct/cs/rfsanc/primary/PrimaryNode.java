@@ -4,6 +4,7 @@ import za.ac.uct.cs.rfsanc.Node;
 import za.ac.uct.cs.rfsanc.WebService;
 
 /**
+ * Primary-node implementation, with various server-side methods.
  *
  * @author James William Lewis (james.will.lewis@gmail.com)
  */

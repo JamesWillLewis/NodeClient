@@ -13,37 +13,66 @@ import za.ac.uct.cs.rfsanc.secondary.SecondaryNode;
  */
 public class Driver {
 
+    /**
+     * Types of Nodes.
+     */
     private enum NodeType {
 
         PRIMARY, SECONDARY
     }
+    /**
+     * Persistent node-configuration profile.
+     */
     private Properties properties;
+    /**
+     * The type of node running this application.
+     */
     private NodeType nodeType;
+    /**
+     * The name of this node.
+     */
     private String nodeName;
+    /**
+     * The primary-key of this node.
+     */
     private String nodeID;
+    /**
+     * The authorisation username of this node.
+     */
     private String username;
+    /**
+     * The authorisation password of this node.
+     */
     private String password;
-    private PrimaryNode primaryNode;
-    private SecondaryNode secondaryNode;
+    /**
+     * The node instance for this context.
+     */
+    private Node node;
+    /**
+     * Base URI of the server web-resources.
+     */
     private String baseURI;
+    /**
+     * Path-name of node configuration XML file.
+     */
     private static final String NODE_CONFIG_FILENAME = "node_config.xml";
 
     /**
-     * Initialize the node
+     * Initialise the node properties.
      */
     public Driver() {
         properties = new Properties();
         try {
             properties.loadFromXML(new FileInputStream(NODE_CONFIG_FILENAME));
+            this.nodeName = properties.getProperty("node_name");
+            this.nodeID = properties.getProperty("node_id");
+            this.username = properties.getProperty("username");
+            this.password = properties.getProperty("password");
+            this.nodeType = properties.getProperty("type").equals("primary") ? NodeType.PRIMARY : NodeType.SECONDARY;
+            this.baseURI = properties.getProperty("base_uri");
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
-        this.nodeName = properties.getProperty("node_name");
-        this.nodeID = properties.getProperty("node_id");
-        this.username = properties.getProperty("username");
-        this.password = properties.getProperty("password");
-        this.nodeType = properties.getProperty("type").equals("primary") ? NodeType.PRIMARY : NodeType.SECONDARY;
-        this.baseURI = properties.getProperty("base_uri");
     }
 
     /**
@@ -63,12 +92,12 @@ public class Driver {
 
         if (nodeType == NodeType.PRIMARY) {
             System.out.println("===[ Node is a PRIMARY user ]===");
-            primaryNode = new PrimaryNode(username, password, nodeID, baseURI);
-            primaryNode.runDaemon();
+            node = new PrimaryNode(username, password, nodeID, baseURI);
+            node.runDaemon();
         } else {
             System.out.println("===[ Node is a SECONDARY user ]===");
-            secondaryNode = new SecondaryNode(username, password, nodeID, baseURI);
-            secondaryNode.runDaemon();
+            node = new SecondaryNode(username, password, nodeID, baseURI);
+            node.runDaemon();
         }
     }
 }
