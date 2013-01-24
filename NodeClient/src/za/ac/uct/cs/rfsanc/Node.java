@@ -12,6 +12,18 @@ public abstract class Node {
      */
     protected WebService nodeService;
     /**
+     * REST resource URI for list-leases-all request
+     */
+    private final String PATH_LIST_LEASES_ALL = "list_leases_all";
+    /**
+     * REST resource URI for list-leases-node request
+     */
+    private final String PATH_LIST_LEASES_NODE = "list_leases_node?node=$1";
+    /**
+     * REST resource URI for list-current-auctions request
+     */
+    private final String PATH_LIST_CURRENT_AUCTIONS = "list_current_auctions";
+    /**
      * The UID of this node, as specified on the server.
      */
     protected String nodeID;
@@ -49,13 +61,27 @@ public abstract class Node {
      * @param params List of arguments
      * @return Path URI with parameters flags replaced with arguments
      */
-    protected String setPathQueryParams(String path, String... args) {
+    protected String insertQueryParamArgs(String path, String... args) {
         String result = path;
         for (int i = 0; i < args.length; i++) {
             result = result.replaceAll("$" + (i + 1), args[i]);
         }
         return result;
     }
+    
+    public String listCurrentAuctions(){
+        return nodeService.doGet(String.class, PATH_LIST_CURRENT_AUCTIONS);
+    }
+    
+    public String listLeasesAll(){
+        return nodeService.doGet(String.class, PATH_LIST_LEASES_ALL);
+    }
+    
+    public String listLeasesOfNode(String nodeID){
+        return nodeService.doGet(String.class, insertQueryParamArgs(PATH_LIST_LEASES_NODE, nodeID));
+    }
+    
+    
 
     /**
      * Run daemon process for the node.
